@@ -16,10 +16,6 @@ function filterTrickle (sdp) {
   return sdp.replace(/a=ice-options:trickle\s\n/g, '')
 }
 
-function warn (message) {
-  console.warn(message)
-}
-
 /**
  * WebRTC peer connection. Same API as node core `net.Socket`, plus a few extra methods.
  * Duplex stream.
@@ -232,7 +228,7 @@ class Peer extends stream.Duplex {
     this._pc.addIceCandidate(iceCandidateObj)
       .catch(err => {
         if (!iceCandidateObj.address || iceCandidateObj.address.endsWith('.local')) {
-          warn('Ignoring unsupported ICE candidate.')
+          this._debug('Ignoring unsupported ICE candidate.')
         } else {
           this.destroy(errCode(err, 'ERR_ADD_ICE_CANDIDATE'))
         }
