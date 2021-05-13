@@ -611,7 +611,7 @@ class Peer extends stream.Duplex {
 
         const sendOffer = () => {
           if (this.destroyed) return
-          const signal = this._pc.localDescription || offer
+          const signal = offer
           this._debug('signal')
           this.emit('signal', {
             type: signal.type,
@@ -661,7 +661,7 @@ class Peer extends stream.Duplex {
 
         const sendAnswer = () => {
           if (this.destroyed) return
-          const signal = this._pc.localDescription || answer
+          const signal = answer
           this._debug('signal')
           this.emit('signal', {
             type: signal.type,
